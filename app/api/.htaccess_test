@@ -1,9 +1,7 @@
 RewriteEngine On
 
 # if hosting api files on root use only /
-RewriteBase /api
+RewriteBase /test/api
 
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule api/. - [PT,L]
-
 RewriteRule ^(.*)$ index.php [QSA,L]
