@@ -7,7 +7,6 @@ require_once ("common.php");
 
 $app = new \Slim\Slim();
 
-
 $app->get('/raw', 'getRaw');
 $app->get('/raw/:id', 'getRaw');
 function getRaw($id = null) {
@@ -16,27 +15,55 @@ function getRaw($id = null) {
     echo fetchRows($sql_query);
 }
 
-
 $app->get('/agent', 'getAgent');
 $app->get('/agent/:agent', 'getAgent');
+$app->get('/agent/:agent/:id', 'getAgent');
 function getAgent($agent = null) {
     $sql_query = "select * FROM agent";
     if (!is_null($agent)) $sql_query .= " WHERE agent='".$agent."'";
+    if (!is_null($agent) && !is_null($id)) $sql_query .= " AND id='".$id."'";
     echo fetchRows($sql_query);
 }
-
-
 
 $app->get('/speedtest', 'getSpeedTest');
-$app->get('/speedtest/:id', 'getSpeedTest');
-function getSpeedTest($id = null) {
-    $sql_query = "select * FROM agent";
-    if (!is_null($agent)) $sql_query .= " WHERE speedtest='".$id."'";
+$app->get('/speedtest/:agent', 'getSpeedTest');
+$app->get('/speedtest/:agent/:id', 'getSpeedTest');
+function getSpeedTest($agent = null, $id = null) {
+    $sql_query = "select * FROM speedtest";
+    if (!is_null($agent)) $sql_query .= " WHERE agent='".$agent."'";
+    if (!is_null($agent) && !is_null($id)) $sql_query .= " AND id='".$id."'";
     echo fetchRows($sql_query);
 }
 
+$app->get('/fail2ban', 'getFail2Ban');
+$app->get('/fail2ban/:agent', 'getFail2Ban');
+$app->get('/fail2ban/:agent/:id', 'getFail2Ban');
+function getFail2Ban($agent = null, $id = null) {
+    $sql_query = "select * FROM fail2ban";
+    if (!is_null($agent)) $sql_query .= " WHERE agent='".$agent."'";
+    if (!is_null($agent) && !is_null($id)) $sql_query .= " AND id='".$id."'";
+    echo fetchRows($sql_query);
+}
 
+$app->get('/heartbeat', 'getHeartbeat');
+$app->get('/heartbeat/:agent', 'getHeartbeat');
+$app->get('/heartbeat/:agent/:id', 'getHeartbeat');
+function getHeartbeat($agent = null, $id = null) {
+    $sql_query = "select * FROM heartbeat";
+    if (!is_null($agent)) $sql_query .= " WHERE agent='".$agent."'";
+    if (!is_null($agent) && !is_null($id)) $sql_query .= " AND id='".$id."'";
+    echo fetchRows($sql_query);
+}
 
+$app->get('/logged_in_users', 'getLoggedInUsers');
+$app->get('/logged_in_users/:agent', 'getLoggedInUsers');
+$app->get('/logged_in_users/:agent/:id', 'getLoggedInUsers');
+function getLoggedInUsers($agent = null, $id = null) {
+    $sql_query = "select * FROM logged_in_users";
+    if (!is_null($agent)) $sql_query .= " WHERE agent='".$agent."'";
+    if (!is_null($agent) && !is_null($id)) $sql_query .= " AND id='".$id."'";
+    echo fetchRows($sql_query);
+}
 
 
 

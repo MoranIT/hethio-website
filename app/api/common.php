@@ -28,8 +28,9 @@ function fetchRows($sql_query) {
         $stmt   = $dbCon->query($sql_query);
         $results  = $stmt->fetchAll(PDO::FETCH_OBJ);
         $dbCon = null;
-        //echo '{"agent": ' . json_encode($agents) . '}';
-        return json_encode($results);
+        if (count($results) > 0)
+            return json_encode($results);
+        else return '{"error":{"text":"Invalid Query"}}';
     }
     catch(PDOException $e) {
         return '{"error":{"text":'. $e->getMessage() .'}}';
