@@ -7,7 +7,11 @@ require_once ('vendor/autoload.php');
 function getConnection() {
     try {
         $db_username = "hethio";
-        $db_password = "M0r@n!T";
+        if ($_SERVER['HTTP_HOST'] === "heth.io") {
+            $db_password = "";
+        } else {
+            $db_password = "hVXsMBeYPD3T3sq3oPoZRwKTYg";
+        }
         $conn = new PDO('mysql:host=hethio.moranit.com;dbname=hethio', $db_username, $db_password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

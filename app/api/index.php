@@ -1,8 +1,7 @@
 <?php
 /**
- * RSS Controller
- *
- * @internal TWS review r5603
+ * http://www.phpgang.com/how-to-create-restful-api-webservice-with-slim-php-and-mysql_588.html
+ * http://www.slimframework.com/
  */
 require_once ("common.php");
 
