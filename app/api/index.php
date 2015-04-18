@@ -18,12 +18,25 @@ function getRaw($id = null) {
 $app->get('/agent', 'getAgent');
 $app->get('/agent/:agent', 'getAgent');
 $app->get('/agent/:agent/:id', 'getAgent');
-function getAgent($agent = null) {
+function getAgent($agent = null, $id = null) {
     $sql_query = "select * FROM agent";
     if (!is_null($agent)) $sql_query .= " WHERE agent='".$agent."'";
     if (!is_null($agent) && !is_null($id)) $sql_query .= " AND id='".$id."'";
     echo fetchRows($sql_query);
 }
+
+$app->get('/agentstatus', 'getAgentStatus');
+$app->get('/agentstatus/:agent', 'getAgentStatus');
+function getAgentStatus($agent = null) {
+    $sql_query = "select a.* from agent a inner join ( select max(timestamp) timestamp, agent from agent where status like 'daemon%'";
+    if (!is_null($agent)) $sql_query .= " AND agent='".$agent."'";
+    $sql_query .= " group by agent) j on a.agent=j.agent and a.timestamp=j.timestamp order by a.agent";
+    echo fetchRows($sql_query);
+}
+
+
+
+
 
 $app->get('/speedtest', 'getSpeedTest');
 $app->get('/speedtest/:agent', 'getSpeedTest');
