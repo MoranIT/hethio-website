@@ -4,7 +4,7 @@ angular.module('myApp.api.agent', [])
 
     .factory('apiAgent', ['$http', function($http) {
 
-        var urlBase = '/api/agent';
+        var urlBase = 'api/agent';
         var apiAgent = {};
 
 
