@@ -28,7 +28,7 @@ function getAgent($agent = null, $id = null) {
 $app->get('/agentstatus', 'getAgentStatus');
 $app->get('/agentstatus/:agent', 'getAgentStatus');
 function getAgentStatus($agent = null) {
-    $sql_query = "select a.* from agent a inner join ( select max(timestamp) timestamp, agent from agent where status like 'daemon%'";
+    $sql_query = "select a.* from agent a inner join ( select max(timestamp) timestamp, agent from agent where status like 'agent%' or status like 'daemon%'";
     if (!is_null($agent)) $sql_query .= " AND agent='".$agent."'";
     $sql_query .= " group by agent) j on a.agent=j.agent and a.timestamp=j.timestamp order by a.agent";
     echo fetchRows($sql_query);
