@@ -1,7 +1,14 @@
+<link rel="stylesheet" href="home/home.css">
+
+
 <h2>heth.io</h2>
 <p>The following is the last known status of the hethio-agent on our beta systems.</p>
 
+<div class="tile" ng-repeat="a in agentStatus">
+    <img src="images/modem_{{a.qstatus}}.png" />
+    <div><label>Name:</label> {{a.name}}</div>
+    <div><label>Status:</label> {{a.status}}</div>
+    <div><label>Download:</label> {{a.speedtest.download}} Mbps</div>
+    <div><label>Upload:</label> {{a.speedtest.upload}} Mbps</div>
+</div>
 
-<ul>
-    <li ng-repeat="a in agentStatus"><b>({{a.agent}})</b> {{a.status}}</li>
-</ul>
