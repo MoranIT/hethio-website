@@ -6,9 +6,10 @@
 
 <div class="tile" ng-repeat="a in agentStatus">
     <img src="images/modem_{{a.qstatus}}.png" />
-    <div><label>Name:</label> {{a.name}}</div>
+    <div><label>Name:</label> {{a.name}} ({{a.agent}})</div>
     <div><label>Status:</label> {{a.status}}</div>
     <div><label>Download:</label> {{a.speedtest.download}} Mbps</div>
     <div><label>Upload:</label> {{a.speedtest.upload}} Mbps</div>
+    <div><label>Timestamp:</label> {{a.timestamp}}</div>
 </div>
 
